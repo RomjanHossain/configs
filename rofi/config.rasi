@@ -1,0 +1,12 @@
+/** Basic config file **/
+configuration {
+  /* show-icons:         true; */
+  /* icon-theme:         "WhiteSur"; */
+  /* theme:"./launchers/slate/slate_left.rasi"; */
+  theme:"./launchers/misc/blurry.rasi";
+}
+
+/* element-text, element-icon { */
+/*     background-color: inherit; */
+/*     text-color:       inherit; */
+/* } */
