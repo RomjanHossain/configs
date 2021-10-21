@@ -3,9 +3,9 @@
 -- general
 lvim.format_on_save = true
 lvim.lint_on_save = true
-lvim.colorscheme = "spacegray"
+--lvim.colorscheme = "spacegray"
 vim.wo.relativenumber = true
-lvim.builtin.compe.autocomplete = true
+-- lvim.builtin.compe.autocomplete = true
 lvim.transparent_window = true
 -- keymappings [view all the defaults by pressing <leader>Lk]
 -- add your own keymapping
@@ -108,10 +108,9 @@ lvim.plugins = {
   end
 },
 {
-    'akinsho/flutter-tools.nvim', 
+    'akinsho/flutter-tools.nvim',
     -- requires = 'nvim-lua/plenary.nvim'
     config=function ()
-      
     -- requires('nvim-lua/plenary.nvim');
 require("flutter-tools").setup{} -- use defaults
     end
@@ -148,7 +147,6 @@ require("flutter-tools").setup{} -- use defaults
 lvim.lang.dart.autoformat = true
 lvim.builtin.which_key.mappings["F"] = {
 
-   
       name = "Flutter",
       c = { ":FlutterCopyProfilerUrl<CR>", "Copy Profile Url" },
       d = { ":FlutterDevices<CR>", "Devices" },
@@ -167,14 +165,26 @@ lvim.builtin.which_key.mappings["F"] = {
 
 
 -- for python
-
 -- set a formatter if you want to override the default lsp one (if it exists)
-lvim.lang.python.formatters = {
-  {
-    exe = "yapf",
-    args = {}
-  }
-}
+lvim.lang.python.formatters = { { exe = "black" } }
+-- lvim.lang.python.formatters = {
+--   {
+--     exe = "black",
+--     args = {}
+--   }
+-- }
+-- set a formatter if you want to override the default lsp one (if it exists)
+-- set an additional linter
+-- lvim.lsp.override = { "pyright" }
+lvim.lang.python.linters = { { exe = "flake8" } }
+
+lvim.builtin.treesitter.indent = { enable = true, disable = { "yaml", "python" } } -- treesitter is buggy :(
+-- lvim.lang.python.linters = {
+--   {
+--     exe = "flake8",
+--     args = {}
+--   }
+-- }
 -- set an additional linter
 -- lvim.lang.python.linters = {
 --   {
@@ -182,8 +192,8 @@ lvim.lang.python.formatters = {
 --     args = {}
 --   }
 -- }
-
-
+-- bash check
+lvim.lang.sh.linters = { { exe = "shellcheck" } }
 -- tailwindcss = {
 --       active = false,
 --       filetypes = {
@@ -206,4 +216,4 @@ lvim.lang.javascriptreact.formatters = lvim.lang.javascript.formatters
 lvim.lang.typescript.formatters = {  { exe = "prettier" } }
 lvim.lang.typescriptreact.formatters = lvim.lang.typescript.formatters
 
-
+lvim.lsp.automatic_servers_installation = true
