@@ -88,25 +88,36 @@ lvim.plugins = {
 --   end,
 -- },
 
--- {
---   "karb94/neoscroll.nvim",
---   event = "WinScrolled",
---   config = function()
---   require('neoscroll').setup({
---         -- All these keys will be mapped to their corresponding default scrolling animation
---         mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
---         '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
---         hide_cursor = true,          -- Hide cursor while scrolling
---         stop_eof = true,             -- Stop at <EOF> when scrolling downwards
---         use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
---         respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
---         cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
---         easing_function = nil,        -- Default easing function
---         pre_hook = nil,              -- Function to run before the scrolling animation starts
---         post_hook = nil,              -- Function to run after the scrolling animation ends
---         })
---   end
--- },
+{
+  "karb94/neoscroll.nvim",
+  event = "WinScrolled",
+  config = function()
+  require('neoscroll').setup({
+        -- All these keys will be mapped to their corresponding default scrolling animation
+        mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
+        '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
+        hide_cursor = true,          -- Hide cursor while scrolling
+        stop_eof = true,             -- Stop at <EOF> when scrolling downwards
+        use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
+        respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
+        cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
+        easing_function = nil,        -- Default easing function
+        pre_hook = nil,              -- Function to run before the scrolling animation starts
+        post_hook = nil,              -- Function to run after the scrolling animation ends
+        })
+  end
+},
+{
+    'akinsho/flutter-tools.nvim',
+    -- requires = 'nvim-lua/plenary.nvim'
+    config=function ()
+    -- requires('nvim-lua/plenary.nvim');
+require("flutter-tools").setup{} -- use defaults
+    end
+
+},
+
+
   {
 'Neevash/awesome-flutter-snippets',
   },
@@ -114,24 +125,15 @@ lvim.plugins = {
   {
 'glepnir/lspsaga.nvim',
 },
-
 {
     'SirVer/ultisnips'
   },
 {
     'mlaursen/vim-react-snippets'
   },
-{
-    'akinsho/flutter-tools.nvim',
-    config=function ()
-    require("flutter-tools").setup{} -- use defaults
-    end
-
-},
 
 
-},
-
+}
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
@@ -142,9 +144,9 @@ lvim.plugins = {
 
 -- lvim.lang.dart.sdk_path = '/Users/pxsanghyo/.flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot'
 -- lvim.lang.dart.flutter_tools.active = true
--- me comment
-lvim.lang.dart.autoformat == true
+lvim.lang.dart.autoformat = true
 lvim.builtin.which_key.mappings["F"] = {
+
       name = "Flutter",
       c = { ":FlutterCopyProfilerUrl<CR>", "Copy Profile Url" },
       d = { ":FlutterDevices<CR>", "Devices" },
@@ -163,50 +165,55 @@ lvim.builtin.which_key.mappings["F"] = {
 
 
 -- for python
--- me comment
--- lvim.lang.python.formatters = { { exe = "black" } }
--- me comment
--- lvim.lang.python.linters = { { exe = "flake8" } }
+-- set a formatter if you want to override the default lsp one (if it exists)
+lvim.lang.python.formatters = { { exe = "black" } }
+-- lvim.lang.python.formatters = {
+--   {
+--     exe = "black",
+--     args = {}
+--   }
+-- }
+-- set a formatter if you want to override the default lsp one (if it exists)
+-- set an additional linter
+-- lvim.lsp.override = { "pyright" }
+lvim.lang.python.linters = { { exe = "flake8" } }
 
 lvim.builtin.treesitter.indent = { enable = true, disable = { "yaml", "python" } } -- treesitter is buggy :(
+-- lvim.lang.python.linters = {
+--   {
+--     exe = "flake8",
+--     args = {}
+--   }
+-- }
+-- set an additional linter
+-- lvim.lang.python.linters = {
+--   {
+--     exe = "flake8",
+--     args = {}
+--   }
+-- }
 -- bash check
 lvim.lang.sh.linters = { { exe = "shellcheck" } }
+-- tailwindcss = {
+--       active = false,
+--       filetypes = {
+--         "html",
+--         "css",
+--         "scss",
+--         "javascript",
+--         "javascriptreact",
+--         "typescript",
+--         "typescriptreact",
+--       },
+--       formatter = {
+--         exe = "prettier",
+--         args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote" },
+--         stdin = false,
+--       },
+--     },
+lvim.lang.javascript.formatters = {  { exe = "prettier" } }
+lvim.lang.javascriptreact.formatters = lvim.lang.javascript.formatters
+lvim.lang.typescript.formatters = {  { exe = "prettier" } }
+lvim.lang.typescriptreact.formatters = lvim.lang.typescript.formatters
+
 lvim.lsp.automatic_servers_installation = true
-
--- format setup in new config
-
-local formatters = require "lvim.lsp.null-ls.formatters"
-
-local linterss = require "lvim.lsp.null-ls.linters"
-
-linterss.setup{
-  {exe="flake8",
-    filetypes={
-      "python"
-    }
-  }
-}
-
-formatters.setup {
-  { exe = "black" },
-  {
-    exe = "prettier",
-    args = { "--print-with", "100" },
-    filetypes = {
-      "typescript",
-      "typescriptreact",
-      "javascript",
-      -- "javascriptreact",
-      "html",
-      "css",
-      "scss",
-    },
-  },
-  -- {
-  --   exe="eslint",
-  --   filetypes={
-  --     "javascript"
-  --   }
-  -- },
-}
-

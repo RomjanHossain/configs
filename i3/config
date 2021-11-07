@@ -21,7 +21,9 @@ bindsym $mod+n border normal
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font xft:System San Francisco Display 11
+# font xft:System San Francisco Display 11
+# font xft:Apple Garamond 12
+font xft:Comic Sans 12
 
 # Use Mouse+$mod to drag floating windows
 floating_modifier $mod
@@ -436,7 +438,8 @@ bindsym $mod+shift+x exec betterlockscreen -l blur
 # let's run rofi to use powermunu and other
 # bindsym $mod+n exec --no-startup-id menu_network
 bindsym $mod+p exec --no-startup-id ~/.config/rofi/powermenu/powermenu.sh
-bindsym $mod+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort > /dev/null"
+bindsym $mod+c exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+# bindsym $mod+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort > /dev/null"
 
 
 
@@ -450,3 +453,6 @@ for_window [class="Sxiv"] fullscreen disable, floating enable,
 
 # exec --no-startup-id picom -CGb
 # border_radius 5
+
+# clipboard Manager
+exec_always --no-startup-id greenclip daemon
