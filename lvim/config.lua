@@ -110,7 +110,9 @@ lvim.plugins = {
   {
 'Neevash/awesome-flutter-snippets',
   },
-
+  {
+    'felangel/bloc'
+  },
   {
 'glepnir/lspsaga.nvim',
 },
@@ -210,3 +212,6 @@ formatters.setup {
   -- },
 }
 
+-- lsp saga config shit
+local saga = require 'lspsaga'
+saga.init_lsp_saga()
