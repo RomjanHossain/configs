@@ -3,7 +3,7 @@
 --=============================================================================
 --          This script uses Subliminal to download subtitles,
 --          so make sure to specify your system's Subliminal location below:
-local subliminal = '/home/romjan/.local/bin/subliminal'
+local subliminal = '/usr/bin/subliminal'
 --=============================================================================
 -->>    SUBTITLE LANGUAGE:
 --=============================================================================
@@ -15,7 +15,7 @@ local languages = {
 --          other languages will NOT be downloaded,
 --          so put your preferred language first:
             { 'English', 'en', 'eng' },
-            { 'Dutch', 'nl', 'dut' },
+            -- { 'Dutch', 'nl', 'dut' },
 --          { 'Spanish', 'es', 'spa' },
 --          { 'French', 'fr', 'fre' },
 --          { 'German', 'de', 'ger' },
@@ -51,7 +51,7 @@ local bools = {
 local excludes = {
     -- Movies with a path containing any of these strings/paths
     -- will be excluded from auto-downloading subtitles.
-    -- Full paths are also allowed, e.g.:
+    -- Full paths are also allowed, eg.:
     -- '/home/david/Videos',
     'no-subs-dl',
 }

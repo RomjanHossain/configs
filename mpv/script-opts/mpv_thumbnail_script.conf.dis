@@ -3,7 +3,7 @@
 # and on other platforms to /tmp/mpv_thumbs_cache.
 # The directory will be created automatically, but must be writeable!
 # Use absolute paths, and take note that environment variables like %TEMP% are unsupported (despite the default)!
-cache_directory=/tmp/my_mpv_thumbnails
+cache_directory=/home/romjan/.config/mpv/mpvthumb
 # THIS IS NOT A WINDOWS PATH. COMMENT IT OUT OR ADJUST IT YOURSELF.
 
 # Whether to generate thumbnails automatically on video load, without a keypress
@@ -20,7 +20,7 @@ autogenerate_max_duration=3600
 # ffmpeg is slightly faster than mpv but lacks support for ordered chapters in MKVs,
 # which can break the resulting thumbnails. You have been warned.
 # Defaults to yes (don't use ffmpeg)
-prefer_mpv=yes
+prefer_mpv=no
 
 # Explicitly disable subtitles on the mpv sub-calls
 # mpv can and will by default render subtitles into the thumbnails.
