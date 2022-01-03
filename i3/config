@@ -35,8 +35,8 @@ bindsym $mod+Return exec kitty
 bindsym $mod+Shift+q kill
 
 # start program launcher
-bindsym $mod+d exec --no-startup-id rofi -show drun
-
+# bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+d exec --no-startup-id rofi -no-lazy-grab -show drun -theme themes/appsmenu.rasi
 # launch categorized menu
 bindsym $mod+z exec --no-startup-id morc_menu
 
@@ -59,7 +59,7 @@ bindsym $mod+Ctrl+m exec terminal -e 'alsamixer'
 # Start Applications
 bindsym $mod+Ctrl+b exec kitty -e 'bmenu'
 bindsym $mod+F2 exec firefox
-bindsym $mod+F3 exec pcmanfm
+bindsym $mod+F3 exec nautilus
 # bindsym $mod+F3 exec ranger
 bindsym $mod+Shift+F3 exec pcmanfm_pkexec
 bindsym $mod+F5 exec kitty -e 'mocp'
@@ -285,7 +285,7 @@ exec --no-startup-id clipit
 # exec_always --no-startup-id sbxkb
 # exec --no-startup-id start_conky_maia
 # exec --no-startup-id start_conky_green
-exec --no-startup-id xautolock -time 10 -locker betterlockscreen -l blur
+# exec --no-startup-id xautolock -time 10 -locker betterlockscreen -l blur
 
 exec_always --no-startup-id ff-theme-util
 exec_always --no-startup-id fix_xcursor
@@ -381,11 +381,11 @@ gaps outer 1
 # gaps outer all plus 5
 
 # Smart gaps (gaps used if only more than one container on the workspace)
-smart_gaps on
+# smart_gaps on
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace) 
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
-smart_borders on
+# smart_borders on
 
 # Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
 set $mode_gaps Gaps: (o) outer, (i) inner
@@ -428,17 +428,18 @@ mode "$mode_gaps_outer" {
 
 # autostart myconf
 
-# exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # exec_always --no-startup-id $HOME/.config/polybar/launch.sh --shapes
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh --material
-exec --no-startup-id betterlockscreen -w blur
+# exec_always --no-startup-id $HOME/.config/polybar/launch.sh --material
+# exec --no-startup-id betterlockscreen -w blur
 exec --no-startup-id source ~/.fehbg
-bindsym $mod+shift+x exec betterlockscreen -l blur
+# bindsym $mod+shift+x exec betterlockscreen -l blur
 
 # let's run rofi to use powermunu and other
 # bindsym $mod+n exec --no-startup-id menu_network
-bindsym $mod+p exec --no-startup-id ~/.config/rofi/powermenu/powermenu.sh
-bindsym $mod+c exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+bindsym $mod+p exec --no-startup-id ~/.config/rofi/scripts/powermenu.sh
+# bindsym $mod+p exec --no-startup-id ~/.config/rofi/powermenu/powermenu.sh
+bindsym $mod+c exec rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}' -theme themes/clipboard.rasi
 # bindsym $mod+c exec --no-startup-id "rofi -show calc -modi calc -no-show-match -no-sort > /dev/null"
 
 
@@ -456,3 +457,5 @@ for_window [class="Sxiv"] fullscreen disable, floating enable,
 
 # clipboard Manager
 exec_always --no-startup-id greenclip daemon
+
+gaps top 30
