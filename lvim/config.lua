@@ -1,67 +1,101 @@
--- THESE ARE EXAMPLE ClvimNFIGS FEEL FREE Tlvim CHANGE Tlvim WHATEVER YlvimU WANT
+--[[
+lvim is the global options object
+
+Linters should be
+filled in as strings with either
+a global executable or a path to
+an executable
+]]
+-- THESE ARE EXAMPLE CONFIGS FEEL FREE TO CHANGE TO WHATEVER YOU WANT
 
 -- general
+lvim.log.level = "warn"
 lvim.format_on_save = true
-lvim.lint_on_save = true
---lvim.colorscheme = "spacegray"
 vim.wo.relativenumber = true
--- lvim.builtin.compe.autocomplete = true
+-- lvim.colorscheme = "onedarker"
 lvim.transparent_window = true
 -- keymappings [view all the defaults by pressing <leader>Lk]
--- add your own keymapping
-lvim.lsp.diagnostics.virtual_text = false
-lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
--- hover doc in flutter
-lvim.keys.normal_mode["gk"] = "<cmd> Lspsaga hover_doc<CR>"
-lvim.keys.normal_mode["gs"] = "<cmd> Lspsaga signature_help<CR>"
-lvim.keys.normal_mode["gd"] = "<cmd> Lspsaga preview_definition<CR>"
--- augroup neovim_terminal
-    -- autocmd!
-    -- " Enter Terminal-mode (insert) automatically
-    -- autocmd Termlvimpen * startinsert
-    -- " Disables number lines on terminal buffers
--- -    autocmd Termlvimpen * :set nonumber norelativenumber
-   -- * :setlocal nonumber norelativenumber
-    -- " allows you to use Ctrl-c on terminal window
-    -- autocmd Termlvimpen * nnoremap <buffer> <C-c> i<C-c>
--- augroup END
-
-
--- keymappings
 lvim.leader = "space"
--- overwrite the key-mappings provided by LunarVim for any mode, or leave it empty to keep them
--- lvim.keys.normal_mode = {
---   Page down/up
---   {'[d', '<PageUp>'},
---   {']d', '<PageDown>'},
---
---   Navigate buffers
---   {'<Tab>', ':bnext<CR>'},
---   {'<S-Tab>', ':bprevious<CR>'},
--- }
--- if you just want to augment the existing ones then use the utility function
--- require("utils").add_keymap_insert_mode({ silent = true }, {
--- { "<C-s>", ":w<cr>" },
--- { "<C-c>", "<ESC>" },
--- })
--- you can also use the native vim way directly
--- vim.api.nvim_set_keymap("i", "<C-Space>", "compe#complete()", { noremap = true, silent = true, expr = true })
+-- add your own keymapping
+lvim.keys.normal_mode["<C-s>"] = ":w<cr>"
+-- unmap a default keymapping
+-- lvim.keys.normal_mode["<C-Up>"] = false
+-- edit a default keymapping
+lvim.keys.normal_mode["<C-q>"] = ":q<cr>"
 
--- TlvimDlvim: User Config for predefined plugins
+-- Change Telescope navigation to use j and k for navigation and n and p for history in both input and normal mode.
+-- we use protected-mode (pcall) just in case the plugin wasn't loaded yet.
+-- local _, actions = pcall(require, "telescope.actions")
+-- lvim.builtin.telescope.defaults.mappings = {
+--   -- for input mode
+--   i = {
+--     ["<C-j>"] = actions.move_selection_next,
+--     ["<C-k>"] = actions.move_selection_previous,
+--     ["<C-n>"] = actions.cycle_history_next,
+--     ["<C-p>"] = actions.cycle_history_prev,
+--   },
+--   -- for normal mode
+--   n = {
+--     ["<C-j>"] = actions.move_selection_next,
+--     ["<C-k>"] = actions.move_selection_previous,
+--   },
+-- }
+
+-- Use which-key to add extra bindings with the leader-key prefix
+-- lvim.builtin.which_key.mappings["P"] = { "<cmd>Telescope projects<CR>", "Projects" }
+-- lvim.builtin.which_key.mappings["t"] = {
+--   name = "+Trouble",
+--   r = { "<cmd>Trouble lsp_references<cr>", "References" },
+--   f = { "<cmd>Trouble lsp_definitions<cr>", "Definitions" },
+--   d = { "<cmd>Trouble lsp_document_diagnostics<cr>", "Diagnostics" },
+--   q = { "<cmd>Trouble quickfix<cr>", "QuickFix" },
+--   l = { "<cmd>Trouble loclist<cr>", "LocationList" },
+--   w = { "<cmd>Trouble lsp_workspace_diagnostics<cr>", "Diagnostics" },
+-- }
+
+-- TODO: User Config for predefined plugins
 -- After changing plugin config exit and reopen LunarVim, Run :PackerInstall :PackerCompile
-lvim.builtin.dashboard.active = true
+lvim.builtin.alpha.active = true
+lvim.builtin.alpha.mode = "dashboard"
+lvim.builtin.notify.active = true
 lvim.builtin.terminal.active = true
-lvim.builtin.nvimtree.side = "left"
+lvim.builtin.nvimtree.setup.view.side = "left"
 lvim.builtin.nvimtree.show_icons.git = 0
 
 -- if you don't want all the parsers change this to a table of the ones you want
-lvim.builtin.treesitter.ensure_installed = 'maintained'
+lvim.builtin.treesitter.ensure_installed = {
+  "bash",
+  "c",
+  "javascript",
+  "json",
+  "lua",
+  "python",
+  "typescript",
+  "tsx",
+  "css",
+  "rust",
+  "java",
+  "yaml",
+}
+
 lvim.builtin.treesitter.ignore_install = { "haskell" }
 lvim.builtin.treesitter.highlight.enabled = true
 
 -- generic LSP settings
--- you can set a custom on_attach function that will be used for all the language servers
--- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
+
+-- ---@usage disable automatic installation of servers
+lvim.lsp.automatic_servers_installation = true
+
+-- ---@usage Select which servers should be configured manually. Requires `:LvimCacheReset` to take effect.
+-- See the full default list `:lua print(vim.inspect(lvim.lsp.override))`
+-- vim.list_extend(lvim.lsp.override, { "pyright" })
+
+-- ---@usage setup a server -- see: https://www.lunarvim.org/languages/#overriding-the-default-configuration
+-- local opts = {} -- check the lspconfig documentation for a list of all possible options
+-- require("lvim.lsp.manager").setup("pylsp", opts)
+
+-- -- you can set a custom on_attach function that will be used for all the language servers
+-- -- See <https://github.com/neovim/nvim-lspconfig#keybindings-and-completion>
 -- lvim.lsp.on_attach_callback = function(client, bufnr)
 --   local function buf_set_option(...)
 --     vim.api.nvim_buf_set_option(bufnr, ...)
@@ -70,82 +104,76 @@ lvim.builtin.treesitter.highlight.enabled = true
 --   buf_set_option("omnifunc", "v:lua.vim.lsp.omnifunc")
 -- end
 
+-- -- set a formatter, this will override the language server formatting capabilities (if it exists)
+local formatters = require "lvim.lsp.null-ls.formatters"
+formatters.setup {
+  { command = "black", filetypes = { "python" } },
+  { command = "isort", filetypes = { "python" } },
+  {
+    -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+    command = "prettier",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    extra_args = { "--print-with", "100" },
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = {
+      "typescript",
+      "typescriptreact",
+      "html",
+      "css",
+      "scss",
+    },
+  },
+}
+
+-- -- set additional linters
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+  { command = "flake8", filetypes = { "python" } },
+  {
+    -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
+    command = "shellcheck",
+    ---@usage arguments to pass to the formatter
+    -- these cannot contain whitespaces, options such as `--line-width 80` become either `{'--line-width', '80'}` or `{'--line-width=80'}`
+    extra_args = { "--severity", "warning" },
+  },
+  {
+    command = "codespell",
+    ---@usage specify which filetypes to enable. By default a providers will attach to all the filetypes it supports.
+    filetypes = { "javascript", "python" },
+  },
+}
+
 -- Additional Plugins
 lvim.plugins = {
-    -- {"folke/tokyonight.nvim"}, {
-    --     "ray-x/lsp_signature.nvim",
-    --     config = function() require"lsp_signature".on_attach() end,
-    --     event = "InsertEnter"
-    -- },
--- {
---   'wfxr/minimap.vim',
---   run = "cargo install --locked code-minimap",
---   -- cmd = {"Minimap", "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHighlight"},
---   config = function ()
---     vim.cmd ("let g:minimap_width = 10")
---     vim.cmd ("let g:minimap_auto_start = 1")
---     vim.cmd ("let g:minimap_auto_start_win_enter = 1")
---   end,
--- },
 
--- {
---   "karb94/neoscroll.nvim",
---   event = "WinScrolled",
---   config = function()
---   require('neoscroll').setup({
---         -- All these keys will be mapped to their corresponding default scrolling animation
---         mappings = {'<C-u>', '<C-d>', '<C-b>', '<C-f>',
---         '<C-y>', '<C-e>', 'zt', 'zz', 'zb'},
---         hide_cursor = true,          -- Hide cursor while scrolling
---         stop_eof = true,             -- Stop at <EOF> when scrolling downwards
---         use_local_scrolloff = false, -- Use the local scope of scrolloff instead of the global scope
---         respect_scrolloff = false,   -- Stop scrolling when the cursor reaches the scrolloff margin of the file
---         cursor_scrolls_alone = true, -- The cursor will keep on scrolling even if the window cannot scroll further
---         easing_function = nil,        -- Default easing function
---         pre_hook = nil,              -- Function to run before the scrolling animation starts
---         post_hook = nil,              -- Function to run after the scrolling animation ends
---         })
---   end
--- },
   {
-'Neevash/awesome-flutter-snippets',
+    'Neevash/awesome-flutter-snippets',
   },
-  {
-    'felangel/bloc'
-  },
-  {
-'glepnir/lspsaga.nvim',
-},
 
-{
-    'SirVer/ultisnips'
+  {
+      'glepnir/lspsaga.nvim',
   },
-{
-    'mlaursen/vim-react-snippets'
-  },
-{
+
+  {
     'akinsho/flutter-tools.nvim',
     config=function ()
     require("flutter-tools").setup{} -- use defaults
     end
-
-},
-
-
-},
-
+  },
+  -- {
+    -- 'nvim-lua/plenary.nvim',
+  -- }
+}
 
 -- Autocommands (https://neovim.io/doc/user/autocmd.html)
 -- lvim.autocommands.custom_groups = {
 --   { "BufWinEnter", "*.lua", "setlocal ts=8 sw=8" },
 -- }
 
--- Additional Leader bindings for WhichKey
 
--- lvim.lang.dart.sdk_path = '/Users/pxsanghyo/.flutter/bin/cache/dart-sdk/bin/snapshots/analysis_server.dart.snapshot'
--- lvim.lang.dart.flutter_tools.active = true
--- me comment
-lvim.lang.dart.autoformat == true
+
+-- lvim.lang.dart.autoformat = true
 lvim.builtin.which_key.mappings["F"] = {
       name = "Flutter",
       c = { ":FlutterCopyProfilerUrl<CR>", "Copy Profile Url" },
@@ -160,58 +188,51 @@ lvim.builtin.which_key.mappings["F"] = {
       q = { ":FlutterQuit<CR>", "Quit" },
       r = { ":FlutterRun<CR>", "Run" },
       v = { ":FlutterVisualDebug<CR>", "Visual Debug" },
-
 }
 
 
--- for python
--- me comment
--- lvim.lang.python.formatters = { { exe = "black" } }
--- me comment
--- lvim.lang.python.linters = { { exe = "flake8" } }
 
-lvim.builtin.treesitter.indent = { enable = true, disable = { "yaml", "python" } } -- treesitter is buggy :(
--- bash check
-lvim.lang.sh.linters = { { exe = "shellcheck" } }
-lvim.lsp.automatic_servers_installation = true
+-- require'compe'.setup {
+--   enabled = true;
+--   autocomplete = true;
+--   debug = false;
+--   min_length = 1;
+--   preselect = 'enable';
+--   throttle_time = 80;
+--   source_timeout = 200;
+--   resolve_timeout = 800;
+--   incomplete_delay = 400;
+--   max_abbr_width = 100;
+--   max_kind_width = 100;
+--   max_menu_width = 100;
+--   documentation = {
+--     border = { '', '' ,'', ' ', '', '', '', ' ' }, -- the border option is the same as `|help nvim_open_win|`
+--     winhighlight = "NormalFloat:CompeDocumentation,FloatBorder:CompeDocumentationBorder",
+--     max_width = 120,
+--     min_width = 60,
+--     max_height = math.floor(vim.o.lines * 0.3),
+--     min_height = 1,
+--   };
 
--- format setup in new config
+--   source = {
+--     path = true;
+--     buffer = true;
+--     calc = true;
+--     nvim_lsp = true;
+--     nvim_lua = true;
+--     vsnip = true;
+--     ultisnips = true;
+--     luasnip = true;
+--   };
+-- }
 
-local formatters = require "lvim.lsp.null-ls.formatters"
 
-local linterss = require "lvim.lsp.null-ls.linters"
+-- hover doc in flutter
+lvim.keys.normal_mode["gk"] = "<cmd> Lspsaga hover_doc<CR>"
+lvim.keys.normal_mode["gs"] = "<cmd> Lspsaga signature_help<CR>"
+lvim.keys.normal_mode["gd"] = "<cmd> Lspsaga preview_definition<CR>"
 
-linterss.setup{
-  {exe="flake8",
-    filetypes={
-      "python"
-    }
-  }
-}
-
-formatters.setup {
-  { exe = "black" },
-  {
-    exe = "prettier",
-    args = { "--print-with", "100" },
-    filetypes = {
-      "typescript",
-      "typescriptreact",
-      "javascript",
-      -- "javascriptreact",
-      "html",
-      "css",
-      "scss",
-    },
-  },
-  -- {
-  --   exe="eslint",
-  --   filetypes={
-  --     "javascript"
-  --   }
-  -- },
-}
-
--- lsp saga config shit
-local saga = require 'lspsaga'
--- saga.init_lsp_saga()
+-- lvim.lang.dart.sdk_path = '/var/lib/snapd/snap/bin/flutter'
+-- lvim.lang.dart.flutter_tools.active = true
+-- lvim.lang.dart.autoformat = true
+lvim.builtin.which_key.mappings.l.a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" }

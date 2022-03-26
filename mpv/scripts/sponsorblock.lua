@@ -1,3 +1,4 @@
+
 -- sponsorblock.lua
 --
 -- This script skips sponsored segments of YouTube videos
@@ -21,7 +22,7 @@ local options = {
 
     -- Note that sponsored segments may ocasionally be inaccurate if this is turned off
     -- see https://blog.ajay.app/voting-and-pseudo-randomness-or-sponsorblock-or-youtube-sponsorship-segment-blocker
-    local_database = true,
+    local_database = false,
 
     -- Update database on first run, does nothing if local_database is false
     auto_update = true,

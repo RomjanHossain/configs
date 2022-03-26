@@ -1,0 +1,30 @@
+/*
+* {
+    #bg-col:  #1e222a;
+    #bg-col-light: #282c34;
+    #border-col: #282c34;
+    #selected-col: #282c34;
+    #blue: #61afef;
+    #fg-col: #abb2bf;
+    #fg-col2: #e06c75;
+    #grey: #565c64;
+    #width: 600;
+}
+*/
+* {
+  bg-col: #15191f;
+  bg-col-light: #181C22;
+  border-col: #21252b;
+  fg: #ecf2f2;
+  red: #FF598B;
+  wifi-accent: #FF598B;
+  blue: #33AEFF;
+  green: #1FE0A6;
+  selected-col: #33AEFF;
+  fg-col2: #15191f;
+  fg-col: #33AEFF;
+  grey: #565c64;
+  width: 600;
+  network-header: url("assets/dark/network-header.png", height);
+  launcher-header: url("assets/dark/launcher-header.png", height);
+}
