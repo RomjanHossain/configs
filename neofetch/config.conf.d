@@ -4,7 +4,7 @@ print_info() {
     info title
     info underline
 
-    # info "OS" distro
+    info "OS" distro
     info "Host" model
     info "Kernel" kernel
     info "Uptime" uptime
@@ -26,7 +26,7 @@ print_info() {
     # info "CPU Usage" cpu_usage
     # info "Disk" disk
     # info "Battery" battery
-    info "Font" font
+    # info "Font" font
     # info "Song" song
     # [[ "$player" ]] && prin "Music Player" "$player"
     # info "Local IP" local_ip
@@ -61,7 +61,7 @@ title_fqdn="off"
 # Example:
 # on:  '4.8.9-1-ARCH'
 # off: 'Linux 4.8.9-1-ARCH'
-kernel_shorthand="off"
+kernel_shorthand="on"
 
 
 # Distro
@@ -85,7 +85,7 @@ distro_shorthand="off"
 # Example:
 # on:  'Arch Linux x86_64'
 # off: 'Arch Linux'
-os_arch="off"
+os_arch="on"
 
 
 # Uptime
@@ -206,7 +206,7 @@ speed_shorthand="off"
 # Example:
 # on:   'Intel i7-6500U'
 # off:  'i7-6500U (4)'
-cpu_brand="off"
+cpu_brand="on"
 
 # CPU Speed
 # Hide/Show CPU speed.
@@ -298,7 +298,7 @@ gpu_type="all"
 # Example:
 # on:  '1920x1080 @ 60Hz'
 # off: '1920x1080'
-refresh_rate="on"
+refresh_rate="off"
 
 
 # Gtk Theme / Icons / Font
@@ -313,7 +313,7 @@ refresh_rate="on"
 # Example:
 # on:  'Numix, Adwaita'
 # off: 'Numix [GTK2], Adwaita [GTK3]'
-gtk_shorthand="on"
+gtk_shorthand="off"
 
 
 # Enable/Disable gtk2 Theme / Icons / Font
@@ -325,7 +325,7 @@ gtk_shorthand="on"
 # Example:
 # on:  'Numix [GTK2], Adwaita [GTK3]'
 # off: 'Adwaita [GTK3]'
-gtk2="off"
+gtk2="on"
 
 # Enable/Disable gtk3 Theme / Icons / Font
 #
@@ -563,7 +563,7 @@ underline_char="-"
 # Example:
 # separator="->":   'Shell-> bash'
 # separator=" =":   'WM = dwm'
-separator="->"
+separator=":"
 
 
 # Color Blocks
@@ -679,7 +679,7 @@ bar_color_total="distro"
 # infobar: 'info [---=======]'
 # barinfo: '[---=======] info'
 # off:     'info'
-cpu_display="infobar"
+cpu_display="off"
 memory_display="off"
 battery_display="off"
 disk_display="off"
@@ -760,8 +760,7 @@ image_source="auto"
 #       Slackware, SunOS, LinuxLite, OpenSUSE, Raspbian,
 #       postmarketOS, and Void have a smaller logo variant.
 #       Use '{distro name}_small' to use the small variants.
-# ascii_distro="DarkOs"
-ascii_distro="macos"
+ascii_distro="auto"
 
 # Ascii Colors
 #

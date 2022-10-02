@@ -1,65 +1,59 @@
-
+;
+;=========================================================
+;
+;
 ;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
 ;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
 ;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
 ;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
 ;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
 ;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
 ;==========================================================
 
 [colors]
+;background = ${xrdb:color0:#222}
+; background = #131416
 background = #0f0607
 background-alt = #444
 background-light = #d4d0a7
+;foreground = ${xrdb:color7:#222}
 foreground = #dfdfdf
 foreground-alt = #dfdfdf
 primary = #ffb52a
 secondary = #e60053
 alert = #bd2c40
+red         = #F7768E
+green       = #9ECE6A
+yellow      = #E0AF68
+blue        = #7AA2F7 
 magenta     = #AD8EE6
-bg = #1A1B26
-fg = #F1F1F1
-mb = #282A36
+cyan        = #444B6A
+white       = #FFFFFF
+black = #1A1D45
 
-trans = #00000000
-white = #FFFFFF
-black = #000000
-
-;; Colors
-
-red = #f7768e
-pink = #FF0677
-purple = #583794
-blue = #7aa2f7
-blue-arch = #0A9CF5
-cyan = #4DD0E1
-teal = #00B19F
-green = #9ece6a
-lime = #B9C244
-yellow = #e0af68
-amber = #FBC02D
-orange = #E57C46
-brown = #AC8476
-grey = #8C8C8C
-indigo = #6C77BB
-blue-gray = #6D8895
 
 [bar/left]
 width = 18%
 height = 24
 offset-x = 1%
-offset-y = 3px
+offset-y = 5px
 radius=8
 fixed-center = false
 
 background = ${colors.background}
 foreground = ${colors.green}
 
-line-size = 3
-line-color = ${color.blue}
+line-size = 2
+line-color = #f00
 
-border-size = 3px
-border-color = ${color.bg}
+border-color = #00000000
 
 padding-left = 0
 padding-right = 2
@@ -67,10 +61,11 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = FiraCode Nerd Font:pixelsize=10;1
-font-1 = Material Icons:pixelsize=13:style:Regular;1
-font-2 = FontAwesome:pixelsize=11;1
-font-3 = Material Design Icons:pixelsize=13:style:Regular;1
+font-0 = Fira Code Medium:pixelsize=10;1
+font-1 = Material Design Icons:pixelsize=11:style:Regular;1
+;font-2 = FontAwesome:pixelsize=11;1
+;font-3 = unifont:fontformat=truetype:size=8:antialias=true;0
+;font-4 = siji:pixelsize=14;1
 
 modules-center = date
 
@@ -128,17 +123,16 @@ cursor-scroll = ns-resize
 width = 12%
 height = 24
 offset-x = 40%
-offset-y = 3px
+offset-y = 7px
 radius=8
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
-line-color = ${color.blue}
+line-size = 2
+line-color = #f00
 
-border-size = 3px
-border-color = ${color.bg}
+border-color = #00000000
 
 padding-left = 0
 padding-right = 2
@@ -146,24 +140,10 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = FiraCode Nerd Font:pixelsize=10;1
-; font-0 = "banana:size=8;2"
-font-1 = Material Icons:pixelsize=13:style:Regular;1
-; font-1 = "Font Awesome 6 Free Solid:size=10;3"
-; font-2 = FontAwesome:pixelsize=11;1
-font-2 = "Material Design Icons Desktop:size=11;3"
-font-3 = Material Design Icons:pixelsize=13:style:Regular;1
-
-
-; Text
-; font-0 = "banana:size=8;2"
-; ; Icons
-; font-1 = "Font Awesome 6 Free Solid:size=10;3"
-; font-2 = "Material Design Icons Desktop:size=11;3"
-; font-3 = "Material Design Icons Desktop:size=15;3"
-; ; Glyphs
-; font-4 = "MesloLGS NF:style=Regular:size=15;4"
-;dpi = 96
+font-0 = Fira Code Medium:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=true;0
+font-2 = siji:pixelsize=14;1
+font-3 = FontAwesome:pixelsize=11;1
 
 modules-center = i3
 
@@ -181,28 +161,25 @@ cursor-scroll = ns-resize
 width = 43%
 height = 24
 offset-x = 56%
-offset-y = 3px
+offset-y = 7px
 radius = 8
 
 background = ${colors.background}
 foreground = ${colors.foreground}
 
-line-size = 3
-line-color = ${color.blue}
+line-size = 2
+line-color = #f00
 
-border-size = 3px
-border-color = ${color.bg}
+border-color = #00000000
 
 padding-left = 0
 padding-right = 1
 
 
-; Text
 font-0 = FiraCode Nerd Font:pixelsize=10;1
 font-1 = Material Icons:pixelsize=13:style:Regular;1
 font-2 = FontAwesome:pixelsize=11;1
 font-3 = Material Design Icons:pixelsize=13:style:Regular;1
-;dpi = 96
 
 modules-center = cpu sep temperature sep memory sep volume sep eth sep redshift
 
@@ -285,32 +262,40 @@ label-empty-padding = 2
 
 [module/i3]
 type = internal/i3
-enable-click = true
-enable-scroll = true
-reverse-scroll = true
-pin-workspaces = true
-occupied-scroll = false
+format = <label-state> <label-mode>
+index-sort = true
+wrapping-scroll = false
 
+; Only show workspaces on the same output as the bar
+;pin-workspaces = true
 
-format = <label-state>
+label-mode-padding = 1
+label-mode-foreground = #000
+label-mode-background = ${colors.primary}
 
-label-focused = 󰮯 
-label-focused-background = ${color.mb}
+; focused = Active workspace on focused monitor
+label-focused = %index%
+label-focused-background = ${colors.background-alt}
+label-focused-underline= ${colors.primary}
 label-focused-padding = 1
-label-focused-foreground = ${color.yellow}
 
-label-occupied = 󰊠
-label-occupied-padding = 1
-label-occupied-background = ${color.mb}
-label-occupied-foreground= ${color.blue}
+; unfocused = Inactive workspace on any monitor
+label-unfocused = %index%
+label-unfocused-padding = 1
 
-label-urgent = %icon%
-label-urgent-padding = 0
+; visible = Active workspace on unfocused monitor
+label-visible = %index%
+label-visible-background = ${self.label-focused-background}
+label-visible-underline = ${self.label-focused-underline}
+label-visible-padding = ${self.label-focused-padding}
 
-label-empty = 󰑊
-label-empty-foreground = ${color.purple}
-label-empty-padding = 1
-label-empty-background = ${color.mb}
+; urgent = Workspace with urgency hint set
+label-urgent = %index%
+label-urgent-background = ${colors.alert}
+label-urgent-padding = 1
+
+; Separator in between workspaces
+; label-separator = |
 
 
 
@@ -496,15 +481,12 @@ menu-3-1 = cancel
 menu-3-1-exec = menu-open-0
 
 [settings]
-screenchange-reload = false
-
-compositing-background = source
-compositing-foreground = over
-compositing-overline = over
-compositing-underline = over
-compositing-border = over
-
-pseudo-transparency = false
+screenchange-reload = true
+;compositing-background = xor
+;compositing-background = screen
+;compositing-foreground = source
+;compositing-border = over
+pseudo-transparency = true
 
 [global/wm]
 margin-top = 5

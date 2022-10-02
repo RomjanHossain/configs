@@ -76,6 +76,7 @@ lvim.builtin.treesitter.ensure_installed = {
   "rust",
   "java",
   "yaml",
+  "dart",
 }
 
 lvim.builtin.treesitter.ignore_install = { "haskell" }
@@ -107,8 +108,8 @@ lvim.lsp.automatic_servers_installation = true
 -- -- set a formatter, this will override the language server formatting capabilities (if it exists)
 local formatters = require "lvim.lsp.null-ls.formatters"
 formatters.setup {
-  { command = "black", filetypes = { "python" } },
-  { command = "isort", filetypes = { "python" } },
+  -- { command = "black", filetypes = { "python" } },
+  -- { command = "isort", filetypes = { "python" } },
   {
     -- each formatter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
     command = "prettier",
@@ -122,14 +123,26 @@ formatters.setup {
       "html",
       "css",
       "scss",
+     "javascript",
+        "javascriptreact",
+        "typescriptreact",
+        "vue",
+        "less",
+        "json",
+        "jsonc",
+        "yaml",
+        "markdown",
+        "graphql",
+        "handlebars",
     },
   },
 }
 
 -- -- set additional linters
 local linters = require "lvim.lsp.null-ls.linters"
+
 linters.setup {
-  { command = "flake8", filetypes = { "python" } },
+  -- { command = "flake8", filetypes = { "python" } },
   {
     -- each linter accepts a list of options identical to https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/doc/BUILTINS.md#Configuration
     command = "shellcheck",
@@ -151,9 +164,12 @@ lvim.plugins = {
     'Neevash/awesome-flutter-snippets',
   },
 
-  {
-      'glepnir/lspsaga.nvim',
+{
+    'dart-lang/dart-vim-plugin'
   },
+  -- {
+  --     'glepnir/lspsaga.nvim',
+  -- },
 
   {
     'akinsho/flutter-tools.nvim',
@@ -161,7 +177,29 @@ lvim.plugins = {
     require("flutter-tools").setup{} -- use defaults
     end
   },
+  {'lewis6991/hover.nvim', config = function()
+    require('hover').setup{
+      init = function()
+        -- Require providers
+        require('hover.providers.lsp')
+        -- require('hover.providers.gh')
+        -- require('hover.providers.man')
+        -- require('hover.providers.dictionary')
+      end,
+      preview_opts = {
+        border = nil
+      },
+      title = true
+    }
+
+    -- Setup keymaps
+    vim.keymap.set('n',  'K', require('hover').hover       , { desc='hover.nvim'         })
+    vim.keymap.set('n',  'gD', require('hover').hover_doc , { desc='hover.nvim'         })
+    vim.keymap.set('n', 'gK', require('hover').hover_select, { desc='hover.nvim (select)' })
+  end},
+  -- auto format
   -- {
+
     -- 'nvim-lua/plenary.nvim',
   -- }
 }
@@ -228,11 +266,25 @@ lvim.builtin.which_key.mappings["F"] = {
 
 
 -- hover doc in flutter
-lvim.keys.normal_mode["gk"] = "<cmd> Lspsaga hover_doc<CR>"
-lvim.keys.normal_mode["gs"] = "<cmd> Lspsaga signature_help<CR>"
-lvim.keys.normal_mode["gd"] = "<cmd> Lspsaga preview_definition<CR>"
+-- lvim.keys.normal_mode["gk"] = "<cmd> Lspsaga hover_doc<CR>"
+-- lvim.keys.normal_mode["gs"] = "<cmd> Lspsaga signature_help<CR>"
+-- lvim.keys.normal_mode["gd"] = "<cmd> Lspsaga preview_definition<CR>"
 
 -- lvim.lang.dart.sdk_path = '/var/lib/snapd/snap/bin/flutter'
 -- lvim.lang.dart.flutter_tools.active = true
 -- lvim.lang.dart.autoformat = true
-lvim.builtin.which_key.mappings.l.a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" }
+-- lvim.builtin.which_key.mappings.l.a = { "<cmd>lua vim.lsp.buf.code_action()<cr>", "Code Action" }
+
+
+
+
+ -- vim.opt.guifont = { "fira code", "h10" }
+vim.opt.guifont = 'fira code:h10'
+vim.g.neovide_transparency=0.8
+vim.g.neovide_cursor_vfx_mode = "railgun"
+
+-- use neo formatter
+vim.g.dart_format_on_save = 1
+-- vim.g.neoformat_run_all_formatters = 1
+
+

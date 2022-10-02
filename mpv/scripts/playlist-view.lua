@@ -1,13 +1,17 @@
+--[[
+mpv-gallery-view | https://github.com/occivink/mpv-gallery-view
+This mpv script generates and displays an overview of the current playlist with thumbnails.
+File placement: scripts/playlist-view.lua
+Settings: script-opts/playlist_view.conf
+Requires: script-modules/gallery-module.lua
+Default keybinding: g script-binding playlist-view-toggle
+]]
+
 local utils = require 'mp.utils'
 local msg = require 'mp.msg'
 local options = require 'mp.options'
 
-local lib = mp.find_config_file('scripts/lib.disable')
-if not lib then
-    return
-end
--- lib can be nil if the folder does not exist or we're in --no-config mode
-package.path = package.path .. ';' .. lib .. '/?.lua;'
+package.path = mp.command_native({ "expand-path", "~~/script-modules/?.lua;" }) .. package.path
 require 'gallery'
 
 ON_WINDOWS = (package.config:sub(1,1) ~= "/")
@@ -37,8 +41,9 @@ gallery.config.always_show_placeholders = true
 gallery.config.accurate = false
 
 opts = {
-    thumbs_dir = ON_WINDOWS and "%APPDATA%\\mpv\\gallery-thumbs-dir" or "~/.mpv_thumbs_dir/",
+    thumbs_dir = ON_WINDOWS and "%APPDATA%\\mpv\\gallery-thumbs-dir" or "~/.cache/thumbnails/mpv-gallery/",
     generate_thumbnails_with_mpv = ON_WINDOWS,
+    mkdir_thumbs = true,
 
     gallery_position = "{ (ww - gw) / 2, (wh - gh) / 2}",
     gallery_size = "{ 9 * ww / 10, 9 * wh / 10 }",
@@ -111,7 +116,11 @@ function reload_config()
     end
     local res = utils.file_info(thumbs_dir)
     if not res or not res.is_dir then
-        msg.error(string.format("Thumbnail directory \"%s\" does not exist", thumbs_dir))
+        if opts.mkdir_thumbs then
+            utils.subprocess({ args = { "mkdir", thumbs_dir } })
+        else
+            msg.error(string.format("Thumbnail directory \"%s\" does not exist", thumbs_dir))
+        end
     end
 
     compute_geometry = get_geometry_function()
@@ -134,7 +143,6 @@ http://lua-users.org/wiki/SecureHashAlgorithm
 -lua implementation of bit32 (used as fallback on lua5.1) from
 https://www.snpedia.com/extensions/Scribunto/engines/LuaCommon/lualib/bit32.lua
 both are licensed under the MIT below:
-
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
