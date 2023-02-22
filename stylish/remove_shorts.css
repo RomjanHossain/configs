@@ -1,0 +1,20 @@
+/* ==UserStyle==
+@name           Pointy Youtube
+@namespace      github.com/Penguin-Spy
+@version        1.1
+@description    Make youtube UI colorful and pointy again.
+@author         Penguin_Spy
+
+==/UserStyle== */
+@-moz-document domain("youtube.com") {
+  
+  /* Remove shorts from recommended page */
+
+    ytd-rich-shelf-renderer[is-shorts] {
+      display: none;
+    }
+	div[class*="video-player"]:not(:hover) div[class^="ytp-ce"],
+   		div[class*="ytp-autohide"] div[class^="ytp-ce"] {
+      		display: none !important;
+   	}
+}
