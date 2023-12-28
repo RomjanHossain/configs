@@ -1,0 +1,93 @@
+full_text=|
+align=center
+# color=#666666
+separator=false
+separator_block_width=7
+border_bottom=2
+border_top=0
+border_right=0
+border_left=0
+
+# script dir
+command=$HOME/.config/i3blocks/scripts/$BLOCK_NAME
+
+
+
+
+[bandwidth]
+interval=3
+INTERFACE=enp2s0
+INLABEL= 
+OUTLABEL=  
+border=#ff4081
+#TREAT_UNKNOWN_AS_UP=0
+
+
+#[cpu_usage]
+#command=echo "$(grep 'cpu ' /proc/stat | awk '{usage=($2+$4)*100/($2+$4+$5)} END {print usage "%"}')"
+#interval=1
+#label=󰻠 
+#color=#53F3F3
+
+[separator]
+
+
+[cpu_util_detailed]
+command=$HOME/.config/i3blocks/scripts/cpu_util_detailed
+label=󰻠 
+markup=pango
+interval=-2
+border=#ff5722
+#report_time=5
+#stats=usr nice sys iowait
+format=%6.2f
+#warn=80
+usr_color=white
+nice_color=white
+sys_color=white
+iowait_color=white
+#irq_color=purple
+#soft_color=violet
+#steal_color=orange
+#guest_color=cyan
+#gnice_color=blue
+#idle_color=white
+#total_color=white
+
+
+[separator]
+
+[memory]
+command=echo "$(free -h | awk '/^Mem:/ {print $3}')"
+interval=1
+label= 
+border=#4caf50
+
+
+[separator]
+
+[volume]
+LABEL= 
+interval=once
+markup=pango
+signal=10
+border=#ffd700
+
+
+
+[separator]
+
+[calendar]
+interval=1
+LABEL= 
+#DATEFMT=+%H:%M:%S %p
+DATEFMT=+%I:%M %p 
+#SHORTFMT=+%H:%M:%S
+#SHORTFMT=+%I:%M %p
+HEIGHT=-20
+WIDTH=500
+border=#00bcd4
+
+
+
+
